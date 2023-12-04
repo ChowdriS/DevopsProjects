@@ -1,21 +1,10 @@
-# Use a minimal web server image as the base image
 FROM nginx:alpine
-
-# Remove the default NGINX welcome page
 RUN rm -rf /usr/share/nginx/html/*
-
-# Install Git to clone the repository
 RUN apk update && apk add git
-
-# Clone your GitHub repository and copy the contents to the NGINX web server directory
 RUN git clone https://github.com/ChowdriS/docker.git /tmp/repo && \
     mv /tmp/repo/* /usr/share/nginx/html/ && \
     rm -rf /tmp/repo
-
-# Expose port 80
 EXPOSE 80
-
-# Start NGINX
 CMD ["nginx", "-g", "daemon off;"]
 
 
@@ -38,7 +27,7 @@ CMD ["nginx", "-g", "daemon off;"]
 # # Install project dependencies
 # RUN npm install
 
-# # Clone your GitHub repository (replace with your repo URL)
+# # Clone your GitHub repository
 # RUN git clone https://github.com/ChowdriS/Portfolio.git .
 
 # # Build the Next.js application
@@ -52,3 +41,6 @@ CMD ["nginx", "-g", "daemon off;"]
 
 # # Expose port 80
 # EXPOSE 80
+
+# # Start NGINX
+# CMD ["nginx", "-g", "daemon off;"]
